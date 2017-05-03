@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Rebase from 're-base';
-import PDF from 'react-pdf';
 import './App.css';
 
 let base = Rebase.createClass({
@@ -56,10 +55,13 @@ class App extends Component {
     let { notes } = this.state;
     return (
       <div className="App">
+        <a-scene embedded artoolkit='sourceType: webcam;'>
+          <a-box position='0 0 0.5' material='opacity: 0.5;'></a-box>
+          <a-marker-camera preset='hiro'></a-marker-camera>
+        </a-scene>
         {notes.map(note =>
           <p key={note}>{note}</p>
         )}
-        <PDF file="file:///Users/jonathan/Desktop/book.pdf" onDocumentComplete={(...args) => this.onDocumentComplete(...args)} onPageComplete={(...args) => this.onPageComplete(...args)} page={this.state.page} />
       </div>
     );
   }
