@@ -34,9 +34,9 @@ let base = Rebase.createClass({
 let username = 'nybblr';
 
 let users = [
-  {id: 1, markerId: 3},
-  {id: 2, markerId: 7},
-  {id: 3, markerId: 11},
+  {id: 1, markerId: 3, progress: 'behind'},
+  {id: 2, markerId: 7, progress: 'on-track'},
+  {id: 3, markerId: 11, progress: 'ahead'},
 ];
 
 class App extends Component {
