@@ -4,6 +4,16 @@ import './App.css';
 
 import Scene from './Scene';
 
+window.visibilityCallback = (objects) => {
+  let markers = {};
+  objects.forEach(marker => {
+    markers[marker.markerId] = marker.object3d.visible;
+
+    let div = document.querySelector('#marker_'+marker.markerId);
+    div.style.display = marker.object3d.visible ? 'block':'none';
+  })
+}
+
 window.markerCallback = (event) => {
   let width = parseInt(document.body.style.width, 10);
   let height = parseInt(document.body.style.height, 10);
