@@ -10,3 +10,7 @@ export default ({ users }) =>
 
     <a-entity camera></a-entity>
   </a-scene>
+
+
+// depth="1" height="1" width="1" rotation="90 0 0" position="0 0.5 0.5"
+        // <a-entity text-geometry="value: Jonathan Martin;" rotation="-90 0 0" position="-0.5 0.001 -0.5" material="color: red;" size="0.2"></a-entity>

@@ -6,14 +6,18 @@
   "dependencies": {
     "aframe": "^0.5.0",
     "aframe-ar": "*",
+    "aframe-text-geometry-component": "^0.5.1",
     "re-base": "^2.7.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
+    "node-sass": "^4.5.2",
     "react-scripts": "0.9.5"
   },
   "scripts": {
+    "build:css": "node-sass --include-path node_modules src/styles/index.scss src/index.css",
+    "watch:css": "node-sass --include-path node_modules -wr src/styles/index.scss src/index.css",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

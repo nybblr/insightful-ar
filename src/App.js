@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Rebase from 're-base';
-import './App.css';
 
 import Scene from './Scene';
 
@@ -34,9 +33,9 @@ let base = Rebase.createClass({
 let username = 'nybblr';
 
 let users = [
-  {id: 1, markerId: 3, progress: 'behind'},
-  {id: 2, markerId: 7, progress: 'on-track'},
-  {id: 3, markerId: 11, progress: 'ahead'},
+  {id: 1, markerId: 3,  name: 'Jonathan Martin', progress: 'behind'},
+  {id: 2, markerId: 7,  name: 'Zack Simon', progress: 'on-track'},
+  {id: 3, markerId: 11, name: 'Bolot Kerimbaev', progress: 'ahead'},
 ];
 
 class App extends Component {
@@ -81,12 +80,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Scene users={users} />
         { users.map(user =>
           <div key={user.id} className="marker" id={`marker_${user.markerId}`}>
-            <h1>{user.id}</h1>
+            <h1>{user.name}</h1>
+            <p className="progress">{user.progress}</p>
           </div>
         )}
-        <Scene users={users} />
       </div>
     );
   }

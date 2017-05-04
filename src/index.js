@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import 'aframe';
+import 'aframe-text-geometry-component';
 import 'aframe-ar';
 import './index.css';
+
+import App from './App';
 
 ReactDOM.render(
   <App />,
