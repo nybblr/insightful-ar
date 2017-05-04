@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import Rebase from 're-base';
 import './App.css';
 
+import Scene from './Scene';
+
+window.markerCallback = (event) => {
+  let width = parseInt(document.body.style.width, 10);
+  let height = parseInt(document.body.style.height, 10);
+  let pos = event.data.marker.pos;
+  let div = document.querySelector('#marker_'+event.data.marker.idMatrix);
+  div.style.left = ''+(pos[0]*width/640)+'px';
+  div.style.top = ''+(pos[1]*height/480)+'px';
+}
+
 let base = Rebase.createClass({
   apiKey: "AIzaSyD9mjz3baEAtuezAJyPJuk1zUU2BagHTUQ",
   authDomain: "insightful-e5084.firebaseapp.com",
@@ -11,6 +22,12 @@ let base = Rebase.createClass({
 });
 
 let username = 'nybblr';
+
+let users = [
+  {id: 1, markerId: 3},
+  {id: 2, markerId: 7},
+  {id: 3, markerId: 11},
+];
 
 class App extends Component {
   constructor(props){
@@ -53,21 +70,14 @@ class App extends Component {
 
   render() {
     return (
-      <a-scene embedded artoolkit='detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceType: webcam;'>
-        <a-marker type="barcode" value="11" barcodeValue="11">
-          <a-box depth="1" height="1" width="1" position='0 0.5 0' material='opacity: 0.5; side:double; color:green;'></a-box>
-        </a-marker>
-
-        <a-marker type="barcode" value="7" barcodeValue="7">
-          <a-box depth="1" height="1" width="1" position='0 0.5 0' material='opacity: 0.5; side:double; color:red;'></a-box>
-        </a-marker>
-
-        <a-marker type="barcode" value="3" barcodeValue="3">
-          <a-box depth="1" height="1" width="1" position='0 0.5 0' material='opacity: 0.5; side:double; color:blue;'></a-box>
-        </a-marker>
-
-        <a-entity camera></a-entity>
-      </a-scene>
+      <div className="App">
+        { users.map(user =>
+          <div key={user.id} className="marker" id={`marker_${user.markerId}`}>
+            <h1>{user.id}</h1>
+          </div>
+        )}
+        <Scene users={users} />
+      </div>
     );
   }
 }
@@ -80,7 +90,8 @@ export default App;
         // {notes.map(note =>
         //   <p key={note}>{note}</p>
         // )}
-        // <a-scene embedded artoolkit='sourceType: webcam;'>
-        //   <a-box position='0 0 0.5' material='opacity: 0.5;'></a-box>
-        //   <a-marker-camera preset='hiro'></a-marker-camera>
-        // </a-scene>
+
+
+
+
+
