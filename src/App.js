@@ -11,7 +11,9 @@ window.visibilityCallback = (objects) => {
     markers[marker.markerId] = marker.object3d.visible;
 
     let div = document.querySelector('#marker_'+marker.markerId);
-    div.style.display = marker.object3d.visible ? 'block':'none';
+    if (div) {
+      div.style.display = marker.object3d.visible ? 'block':'none';
+    }
   })
 }
 
@@ -21,8 +23,10 @@ window.markerCallback = (event) => {
   let height = parseInt(root.style.height, 10);
   let pos = event.data.marker.pos;
   let div = document.querySelector('#marker_'+event.data.marker.idMatrix);
-  div.style.left = ''+(pos[0]*width/640)+'px';
-  div.style.top = ''+(pos[1]*height/480)+'px';
+  if (div) {
+    div.style.left = ''+(pos[0]*width/640)+'px';
+    div.style.top = ''+(pos[1]*height/480)+'px';
+  }
 }
 
 let base = Rebase.createClass({
