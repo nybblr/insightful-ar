@@ -2806,6 +2806,7 @@ a {
   width: 100%;
   height: 100%;
   background-color: #24262A;
+  overflow-y: scroll;
   box-sizing: border-box;
   padding: 24px; }
   .modal h1.name {
