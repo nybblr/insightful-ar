@@ -2811,7 +2811,8 @@ a {
   background-color: #24262A;
   overflow-y: scroll;
   box-sizing: border-box;
-  padding: 24px; }
+  padding: 24px;
+  animation-duration: 250ms; }
   .modal h1.name {
     font-size: 22px;
     font-weight: bold;
