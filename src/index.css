@@ -2789,7 +2789,7 @@ a {
   padding: 24px 16px;
   background-color: rgba(36, 38, 42, 0.95); }
   .marker h1 {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
     margin: 0;
     margin-bottom: 16px; }
@@ -2814,7 +2814,7 @@ a {
   padding: 24px;
   animation-duration: 250ms; }
   .modal h1.name {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
     text-align: center;
     margin-top: 56px; }
