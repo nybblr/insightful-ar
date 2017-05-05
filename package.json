@@ -8,6 +8,7 @@
     "aframe-ar": "*",
     "aframe-text-geometry-component": "^0.5.1",
     "animate.css": "^3.5.2",
+    "normalize.css": "^7.0.0",
     "re-base": "^2.7.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

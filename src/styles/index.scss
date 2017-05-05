@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import "normalize.css/normalize";
 @import "animate.css/animate";
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 
 $background: #24262A;
 $green: #80FF9A;
@@ -71,14 +72,89 @@ a {
   height: 100%;
   background-color: $background;
 
+  box-sizing: border-box;
+  padding: 24px;
+
   h1.name {
     @include t-h1;
     text-align: center;
+    margin-top: 56px;
   }
 
   h2.progress {
     @include t-body;
     text-align: center;
     margin: 0;
+  }
+
+  > .progress-bar {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  > .close {
+    width: 32px;
+    padding: 6px;
+    display: block;
+    box-sizing: border-box;
+    float: right;
+
+    img {
+      display: block;
+    }
+  }
+}
+
+.row {
+  > h3 {
+    @include t-body;
+    font-weight: 700;
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+
+  > p {
+  }
+}
+
+.level {
+  .legend, .dot {
+    vertical-align: middle;
+  }
+
+  .legend:first-child {
+    margin-right: 8px;
+  }
+
+  .legend:last-child {
+    margin-left: 8px;
+  }
+
+  .dot {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 4px;
+
+    &.filled {
+      background-color: white;
+    }
+
+    &.unfilled {
+      border: $gray 2px solid;
+    }
+  }
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: $gray;
+
+  .progress-bar-inner {
+    height: inherit;
+    background-color: $green;
   }
 }
