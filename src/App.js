@@ -3,6 +3,7 @@ import Rebase from 're-base';
 import { Link } from 'react-router';
 
 import Scene from './Scene';
+import t from './translations';
 
 window.visibilityCallback = (objects) => {
   let markers = {};
@@ -84,8 +85,9 @@ class App extends Component {
         <Scene users={users} />
         { users.map(user =>
           <Link to={`/users/${user.id}`} className="marker" id={`marker_${user.markerId}`}>
+            <img className="info" src="icons/info.svg" />
             <h1>{user.name}</h1>
-            <p className="progress">{user.progress}</p>
+            <p className="progress">{t.progress[user.progress]}</p>
           </Link>
         )}
       </div>

@@ -2794,6 +2794,9 @@ a {
     font-size: 16px;
     font-weight: 500;
     margin: 0; }
+  .marker .info {
+    float: right;
+    margin-top: 16px; }
 
 .modal {
   color: white;

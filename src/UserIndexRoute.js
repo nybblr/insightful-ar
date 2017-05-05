@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import Level from './Level';
 import Progress from './Progress';
+import t from './translations';
 
 let skill = 3;
 
@@ -14,7 +15,7 @@ class App extends Component {
           <img src="icons/close.svg" />
         </Link>
         <h1 className="name">Jonathan Martin</h1>
-        <h2 className="progress">Currently Ahead</h2>
+        <h2 className="progress">{t.progress['on-track']}</h2>
         <h2 className="progress">Book Progress: 78%</h2>
         <Progress value={0.8} />
         <section className="row">

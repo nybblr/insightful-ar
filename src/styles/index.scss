@@ -61,6 +61,11 @@ a {
     @include t-body;
     margin: 0;
   }
+
+  .info {
+    float: right;
+    margin-top: 16px;
+  }
 }
 
 .modal {
