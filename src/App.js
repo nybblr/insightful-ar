@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Rebase from 're-base';
+import { Link } from 'react-router';
 
 import Scene from './Scene';
 
@@ -14,8 +15,9 @@ window.visibilityCallback = (objects) => {
 }
 
 window.markerCallback = (event) => {
-  let width = parseInt(document.body.style.width, 10);
-  let height = parseInt(document.body.style.height, 10);
+  let root = document.querySelector('#vr-root');
+  let width = parseInt(root.style.width, 10);
+  let height = parseInt(root.style.height, 10);
   let pos = event.data.marker.pos;
   let div = document.querySelector('#marker_'+event.data.marker.idMatrix);
   div.style.left = ''+(pos[0]*width/640)+'px';
@@ -30,26 +32,25 @@ let base = Rebase.createClass({
   storageBucket: "insightful-e5084.appspot.com",
 });
 
-let username = 'nybblr';
+// let username = 'nybblr';
 
-let users = [
-  {id: 1, markerId: 3,  name: 'Jonathan Martin', progress: 'behind'},
-  {id: 2, markerId: 7,  name: 'Zack Simon', progress: 'on-track'},
-  {id: 3, markerId: 11, name: 'Bolot Kerimbaev', progress: 'ahead'},
-];
+// let users = [
+//   {id: 1, markerId: 3,  name: 'Jonathan Martin', progress: 'behind', goal: 'I want to learn how to make advanced PWAs.', background: 'Junior Android Developer', level: 3},
+//   {id: 2, markerId: 7,  name: 'Zack Simon', goal: 'To become an Xcode pro', background: 'iOS/Android', progress: 'on-track', level: 5},
+//   {id: 3, markerId: 11, name: 'Bolot Kerimbaev', progress: 'ahead', goal: 'To be a pro at all the things, CSS is weird.', background: 'iOS Developer', level: 2},
+// ];
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      notes: [],
+      users: [],
     };
   }
   init(){
-    this.ref = base.syncState(`/${username}`, {
+    this.ref = base.syncState(`/users`, {
       context: this,
-      asArray: true,
-      state: 'notes'
+      state: 'users'
     });
 
     window.setState = this.setState.bind(this);
@@ -75,33 +76,23 @@ class App extends Component {
     this.setState({ page });
   }
 
-
-
   render() {
+    let { users } = this.state;
     return (
       <div className="App">
+  <div id="vr-root">
         <Scene users={users} />
+        { this.props.children }
         { users.map(user =>
-          <div key={user.id} className="marker" id={`marker_${user.markerId}`}>
+          <Link to={`/users/${user.id}`} className="marker" id={`marker_${user.markerId}`}>
             <h1>{user.name}</h1>
             <p className="progress">{user.progress}</p>
-          </div>
+          </Link>
         )}
       </div>
+  </div>
     );
   }
 }
 
 export default App;
-
-
-
-    // let { notes } = this.state;
-        // {notes.map(note =>
-        //   <p key={note}>{note}</p>
-        // )}
-
-
-
-
-

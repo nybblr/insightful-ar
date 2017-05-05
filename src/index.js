@@ -5,9 +5,9 @@ import 'aframe-text-geometry-component';
 import 'aframe-ar';
 import './index.css';
 
-import App from './App';
+import Router from './Router';
 
 ReactDOM.render(
-  <App />,
+  <Router />,
   document.getElementById('root')
 );
