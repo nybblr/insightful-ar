@@ -80,9 +80,8 @@ class App extends Component {
     let { users } = this.state;
     return (
       <div className="App">
-  <div id="vr-root">
+        <div id="vr-root">
         <Scene users={users} />
-        { this.props.children }
         { users.map(user =>
           <Link to={`/users/${user.id}`} className="marker" id={`marker_${user.markerId}`}>
             <h1>{user.name}</h1>
@@ -90,7 +89,8 @@ class App extends Component {
           </Link>
         )}
       </div>
-  </div>
+        { this.props.children }
+      </div>
     );
   }
 }

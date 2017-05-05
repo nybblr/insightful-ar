@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import "animate.css/animate";
 
 $background: #24262A;
 $green: #80FF9A;
@@ -26,6 +27,7 @@ body {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 #vr-root {
@@ -56,6 +58,27 @@ a {
 
   .progress {
     @include t-body;
+    margin: 0;
+  }
+}
+
+.modal {
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $background;
+
+  h1.name {
+    @include t-h1;
+    text-align: center;
+  }
+
+  h2.progress {
+    @include t-body;
+    text-align: center;
     margin: 0;
   }
 }
