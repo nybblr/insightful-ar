@@ -18,6 +18,24 @@ $gray: #66676D;
   font-weight: 500;
 }
 
+@mixin delay($count: 20, $duration: 200ms, $interval: 30ms) {
+  animation-duration: $duration;
+
+  @for $i from 1 to $count {
+    &:nth-child(#{$i}) {
+      animation-delay: $i * $interval;
+    }
+  }
+
+  &:nth-child(n+#{$count}) {
+    animation-delay: $count * $interval;
+  }
+}
+
+.delayed {
+  @include delay($interval: 80ms);
+}
+
 body {
   @include t-body;
   margin: 0;
@@ -166,5 +184,35 @@ a {
   .progress-bar-inner {
     height: inherit;
     background-color: $green;
+    transition: all 0.3s ease;
+  }
+}
+
+.outline {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding-left: 1.5em;
+    text-indent: -.7em;
+    line-height: 1.5;
+  }
+
+  li:before {
+    content: "• ";
+    color: $gray;
+  }
+
+  .level-0 {
+    margin-left: 0px;
+  }
+  .level-1 {
+    margin-left: 16px;
+  }
+  .level-2 {
+    margin-left: 32px;
+  }
+  .level-3 {
+    margin-left: 40px;
   }
 }
