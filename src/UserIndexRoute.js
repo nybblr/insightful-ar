@@ -68,7 +68,7 @@ class App extends Component {
         </Link>
         <h1 className="name">{user.name}</h1>
         <h2 className="progress">{t.progress['on-track']}</h2>
-        <h2 className="progress">Book Progress: {Math.round(progress*100)}%</h2>
+        <h2 className="progress">Book Progress: {Math.round(progress*100)}% (Pg. {pageNumber})</h2>
         <Progress value={progress} />
         <section className="row">
           <h3>Role:</h3>
