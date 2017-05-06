@@ -5,6 +5,7 @@ import Level from './Level';
 import Progress from './Progress';
 import t from './translations';
 import base from './database';
+import calcProgress from './calculate-progress';
 
 window.db = base;
 
@@ -32,6 +33,11 @@ class App extends Component {
       isNullable: true,
       state: 'pdfStat'
     });
+    this.ref3 = base.syncState(`/classStats/current/averagePage`, {
+      context: this,
+      isNullable: true,
+      state: 'averagePage'
+    });
   }
   componentDidMount(){
     this.init();
@@ -39,15 +45,18 @@ class App extends Component {
   componentWillUnmount(){
     base.removeBinding(this.ref);
     base.removeBinding(this.ref2);
+    base.removeBinding(this.ref3);
   }
   componentWillReceiveProps(){
     base.removeBinding(this.ref);
     base.removeBinding(this.ref2);
+    base.removeBinding(this.ref3);
     this.init();
   }
 
   render() {
-    let { user, pdfStat } = this.state;
+    let { user, pdfStat, averagePage } = this.state;
+    user = calcProgress(user, averagePage);
     pdfStat = pdfStat ||
       {
         numPages: 1,
@@ -67,7 +76,7 @@ class App extends Component {
           <img src="icons/close.svg" />
         </Link>
         <h1 className="name">{user.name}</h1>
-        <h2 className="progress">{t.progress['on-track']}</h2>
+        <h2 className="progress">{t.progress[user.progress]}</h2>
         <h2 className="progress">Book Progress: {Math.round(progress*100)}% (Pg. {pageNumber})</h2>
         <Progress value={progress} />
         <section className="row">

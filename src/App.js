@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import Scene from './Scene';
 import t from './translations';
 import base from './database';
+import calcProgress from './calculate-progress';
 
 window.visibilityCallback = (objects) => {
   let markers = {};
@@ -42,6 +43,12 @@ class App extends Component {
       state: 'users'
     });
 
+    this.ref2 = base.syncState(`/classStats/current/averagePage`, {
+      context: this,
+      isNullable: true,
+      state: 'averagePage'
+    });
+
     window.setState = this.setState.bind(this);
   }
   componentDidMount(){
@@ -49,38 +56,33 @@ class App extends Component {
   }
   componentWillUnmount(){
     base.removeBinding(this.ref);
+    base.removeBinding(this.ref2);
   }
   componentWillReceiveProps(){
     base.removeBinding(this.ref);
+    base.removeBinding(this.ref2);
     this.init();
   }
 
 
 
-  onDocumentComplete(pages) {
-    this.setState({ page: 1, pages });
-  }
-
-  onPageComplete(page) {
-    this.setState({ page });
-  }
-
   render() {
-    let { users } = this.state;
+    let { users, averagePage } = this.state;
+    users = Object.keys(users).map(id => {
+      return users[id];
+    });
+    users = users.map(user => calcProgress(user, averagePage));
     return (
       <div className="App">
         <div id="vr-root">
         <Scene users={users} />
-        { Object.keys(users).map(id => {
-          let user = users[id];
-          return (
-          <Link key={id} to={`/users/${user.id}`} className="marker" id={`marker_${user.markerId}`}>
+        { users.map(user =>
+          <Link key={user.id} to={`/users/${user.id}`} className="marker" id={`marker_${user.markerId}`}>
             <img className="info" src="icons/info.svg" />
             <h1>{user.name}</h1>
             <p className="progress">{t.progress[user.progress]}</p>
           </Link>
-          )
-        })}
+        )}
       </div>
         { this.props.children }
       </div>
