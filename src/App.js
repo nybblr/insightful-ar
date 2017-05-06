@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Rebase from 're-base';
 import { Link } from 'react-router';
 
 import Scene from './Scene';
 import t from './translations';
+import base from './database';
 
 window.visibilityCallback = (objects) => {
   let markers = {};
@@ -28,22 +28,6 @@ window.markerCallback = (event) => {
     div.style.top = ''+(pos[1]*height/480)+'px';
   }
 }
-
-let base = Rebase.createClass({
-  apiKey: "AIzaSyD9mjz3baEAtuezAJyPJuk1zUU2BagHTUQ",
-  authDomain: "insightful-e5084.firebaseapp.com",
-  databaseURL: "https://insightful-e5084.firebaseio.com",
-  projectId: "insightful-e5084",
-  storageBucket: "insightful-e5084.appspot.com",
-});
-
-// let username = 'nybblr';
-
-// let users = [
-//   {id: 1, markerId: 3,  name: 'Jonathan Martin', progress: 'behind', goal: 'I want to learn how to make advanced PWAs.', background: 'Junior Android Developer', level: 3},
-//   {id: 2, markerId: 7,  name: 'Zack Simon', goal: 'To become an Xcode pro', background: 'iOS/Android', progress: 'on-track', level: 5},
-//   {id: 3, markerId: 11, name: 'Bolot Kerimbaev', progress: 'ahead', goal: 'To be a pro at all the things, CSS is weird.', background: 'iOS Developer', level: 2},
-// ];
 
 class App extends Component {
   constructor(props){
@@ -87,13 +71,16 @@ class App extends Component {
       <div className="App">
         <div id="vr-root">
         <Scene users={users} />
-        { users.map(user =>
-          <Link to={`/users/${user.id}`} className="marker" id={`marker_${user.markerId}`}>
+        { Object.keys(users).map(id => {
+          let user = users[id];
+          return (
+          <Link key={id} to={`/users/${user.id}`} className="marker" id={`marker_${user.markerId}`}>
             <img className="info" src="icons/info.svg" />
             <h1>{user.name}</h1>
             <p className="progress">{t.progress[user.progress]}</p>
           </Link>
-        )}
+          )
+        })}
       </div>
         { this.props.children }
       </div>
