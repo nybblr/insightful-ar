@@ -29,6 +29,7 @@ class App extends Component {
     });
     this.ref2 = base.syncState(`/users/${params.id}/pdfStat`, {
       context: this,
+      isNullable: true,
       state: 'pdfStat'
     });
   }
@@ -47,6 +48,12 @@ class App extends Component {
 
   render() {
     let { user, pdfStat } = this.state;
+    pdfStat = pdfStat ||
+      {
+        numPages: 1,
+        pageNumber: 0,
+        sections: []
+      };
     let { numPages, pageNumber, sections } = pdfStat;
     let progress = pageNumber / numPages;
     sections = sections.map(s => s
